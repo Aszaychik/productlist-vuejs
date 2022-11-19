@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
-    <title>VueJS Basic</title>
+    <title>ASZShop</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     <style>
       *,
@@ -18,31 +18,33 @@
   </head>
 
   <body class="">
-    <main class="container" id="app">
-      <nav class="navbar navbar-light" v-if="cart.length > 0">
+    <main class="bg-dark text-light" id="app">
+      <nav class="navbar">
         <div class="navbar-text ml-auto">
           <b>Cart:</b>
           <span class="badge badge-pill badge-success">{{ cart.length }}</span>
         </div>
       </nav>
+      <hr class="w-25 mx-auto bg-light" />
+      <h1 class="text-center mt-3 mb-3">ASZShop</h1>
+      <hr class="w-75 mx-auto bg-light" />
 
-      <section class="form-inline mt-3 mr-auto text-capitalize">
-        <label for="maxPrice" class="font-weight-bold mr-2">max price</label>
-        <input class="form-control w-25" type="number" name="maxPrice" id="maxPrice" v-model="maximum" />
+      <section class="container d-flex align-items-center text-capitalize">
+        <label for="maxPrice" class="font-weight-bold mr-2">max price ($)</label>
+        <input class="form-control w-25 mr-2" type="number" name="maxPrice" id="maxPrice" v-model="maximum" />
+        <input type="range" name="" id="" class="custom-range" min="0" max="1999" v-model="maximum" />
       </section>
 
-      <input type="range" name="" id="" class="custom-range" min="0" max="1999" v-model="maximum" />
-
-      <section class="mb-3 d-flex row align-items-center p-3" v-for="product in products" :key="product.id" v-if="product.price <= Number(maximum)">
+      <section class="container mx-auto mb-3 d-flex row align-items-center p-3" v-for="product in products" :key="product.id" v-if="product.price <= Number(maximum)">
         <figure class="col-sm-4 text-center">
           <img :class="imgClass" :src="product.thumbnail" :alt="product.title" width="200" height="200" />
         </figure>
         <figcaption class="col">
-          <h2 class="text-info">{{ product.title }}</h2>
+          <h2 class="text-primary">{{ product.title }}</h2>
           <p class="mb-3">{{ product.description }}</p>
           <div class="d-flex flex-row justify-content-around align-items-center">
-            <p class="h5">Price ${{ product.price }}</p>
-            <button class="btn btn-info" v-on:click="addCart(product)">Add to cart</button>
+            <p class="h5 text-info">Price ${{ product.price }}</p>
+            <button class="btn btn-primary" v-on:click="addCart(product)">Add to cart</button>
           </div>
         </figcaption>
       </section>
