@@ -6,10 +6,20 @@
 const app = new Vue({
   el: "#app",
   data: {
+    style: {
+      label: ['font-weight-bold', 'mr-2'],
+      inputWidth: 60,
+      sliderStatus: false,
+    },
     imgClass: 'img-thumbnail img-fluid mb-3',
     maximum: 1999,
     products: null,
     cart: [],
+  },
+  computed: {
+    sliderState: function () {
+      return this.style.sliderStatus ? 'd-flex' : 'd-none';
+    }
   },
   mounted: function () {
     fetch('https://dummyjson.com/products')
@@ -20,6 +30,21 @@ const app = new Vue({
       })
   },
   methods: {
+    before: function (el) {
+      el.className = 'd-none'
+    },
+    enter: function (el) {
+      var delay = el.dataset.index * 100;
+      setTimeout(function () {
+        el.className = 'row d-flex mb-3 align-items-center animated fadeInRight'
+      }, delay)
+    },
+    leave: function (el) {
+      var delay = el.dataset.index * 100;
+      setTimeout(function () {
+        el.className = 'row d-flex mb-3 align-items-center animated fadeOutRight'
+      }, delay)
+    },
     addCart: function (product) {
       this.cart.push(product);
     }

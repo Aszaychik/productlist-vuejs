@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     <title>ASZShop</title>
+    <link rel="stylesheet" href="app.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <script src="https://kit.fontawesome.com/f79ec98915.js" crossorigin="anonymous"></script>
     <style>
       *,
       html,
@@ -20,20 +22,33 @@
   <body class="">
     <main class="bg-dark text-light" id="app">
       <nav class="navbar">
-        <div class="navbar-text ml-auto">
-          <b>Cart:</b>
-          <span class="badge badge-pill badge-success">{{ cart.length }}</span>
+        <div class="navbar-text ml-auto d-flex align-items-center">
+          <button class="p-2 btn btn-sm btn-outline-success" @click="style.sliderStatus = !style.sliderStatus">
+            <i class="fa-solid fa-filter-circle-dollar"></i>
+          </button>
+          <div class="ml-2 p-2 bg-success rounded" v-if="cart.length > 0">
+            <i class="fa-solid fa-cart-plus"></i>
+            <span class="badge badge-success">{{ cart.length }}</span>
+          </div>
         </div>
       </nav>
       <hr class="w-25 mx-auto bg-light" />
       <h1 class="text-center mt-3 mb-3">ASZShop</h1>
       <hr class="w-75 mx-auto bg-light" />
 
-      <section class="container d-flex align-items-center text-capitalize">
+      <transition name="fade">
+        <section v-if="style.sliderStatus" class="container d-flex align-items-center text-capitalize" :class="sliderState">
+          <label for="" :class="style.label">max price ($)</label>
+          <input type="text" class="form-control mx-2" :style="{'width': style.inputWidth + 'px', 'text-align': 'center'}" v-model="maximum" />
+          <input type="range" class="custom-range" min="0" max="1999" v-model="maximum" />
+        </section>
+      </transition>
+
+      <!-- <section class="container d-flex align-items-center text-capitalize">
         <label for="maxPrice" class="font-weight-bold mr-2">max price ($)</label>
         <input class="form-control w-25 mr-2" type="number" name="maxPrice" id="maxPrice" v-model="maximum" />
         <input type="range" name="" id="" class="custom-range" min="0" max="1999" v-model="maximum" />
-      </section>
+      </section> -->
 
       <section class="container mx-auto mb-3 d-flex row align-items-center p-3" v-for="product in products" :key="product.id" v-if="product.price <= Number(maximum)">
         <figure class="col-sm-4 text-center">
@@ -48,6 +63,8 @@
           </div>
         </figcaption>
       </section>
+
+      <footer class="text-center p-3 font-weight-bold">Copyright By <a href="https://github.com/Aszaychik" class="text-primary">AsZaychik</a></footer>
     </main>
 
     <!-- FRAMEWORK -->
