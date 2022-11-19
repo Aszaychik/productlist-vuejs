@@ -45,25 +45,21 @@
         </section>
       </transition>
 
-      <!-- <section class="container d-flex align-items-center text-capitalize">
-        <label for="maxPrice" class="font-weight-bold mr-2">max price ($)</label>
-        <input class="form-control w-25 mr-2" type="number" name="maxPrice" id="maxPrice" v-model="maximum" />
-        <input type="range" name="" id="" class="custom-range" min="0" max="1999" v-model="maximum" />
-      </section> -->
-
-      <section class="container mx-auto mb-3 d-flex row align-items-center p-3" v-for="product in products" :key="product.id" v-if="product.price <= Number(maximum)">
-        <figure class="col-sm-4 text-center">
-          <img :class="imgClass" :src="product.thumbnail" :alt="product.title" width="200" height="200" />
-        </figure>
-        <figcaption class="col">
-          <h2 class="text-primary">{{ product.title }}</h2>
-          <p class="mb-3">{{ product.description }}</p>
-          <div class="d-flex flex-row justify-content-around align-items-center">
-            <p class="h5 text-info">Price ${{ product.price }}</p>
-            <button class="btn btn-primary" v-on:click="addCart(product)">Add to cart</button>
-          </div>
-        </figcaption>
-      </section>
+      <transition-group name="custom" enter-active-class="animate__animated animate__lightSpeedInLeft" leave-active-class="animate__animated animate__lightSpeedOutRight">
+        <section class="container mx-auto mb-3 d-flex row align-items-center p-3" v-for="product in products" :key="product.id" v-if="product.price <= Number(maximum)">
+          <figure class="col-sm-4 text-center">
+            <img :class="imgClass" :src="product.thumbnail" :alt="product.title" width="200" height="200" />
+          </figure>
+          <figcaption class="col">
+            <h2 class="text-primary">{{ product.title }}</h2>
+            <p class="mb-3">{{ product.description }}</p>
+            <div class="d-flex flex-row justify-content-around align-items-center">
+              <p class="h5 text-info">Price ${{ product.price }}</p>
+              <button class="btn btn-primary" v-on:click="addCart(product)">Add to cart</button>
+            </div>
+          </figcaption>
+        </section>
+      </transition-group>
 
       <footer class="text-center p-3 font-weight-bold">Copyright By <a href="https://github.com/Aszaychik" class="text-primary">AsZaychik</a></footer>
     </main>
