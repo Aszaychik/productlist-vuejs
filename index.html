@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="app.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
     <script src="https://kit.fontawesome.com/f79ec98915.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <style>
       *,
       html,
@@ -36,7 +37,7 @@
       <h1 class="text-center mt-3 mb-3">ASZShop</h1>
       <hr class="w-75 mx-auto bg-light" />
 
-      <transition name="fade">
+      <transition name="custom" enter-active-class="animate__animated animate__zoomIn" leave-active-class="animate__animated animate__zoomOut">
         <section v-if="style.sliderStatus" class="container d-flex align-items-center text-capitalize" :class="sliderState">
           <label for="" :class="style.label">max price ($)</label>
           <input type="text" class="form-control mx-2" :style="{'width': style.inputWidth + 'px', 'text-align': 'center'}" v-model="maximum" />
