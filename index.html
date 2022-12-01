@@ -54,7 +54,7 @@
             <h2 class="text-primary">{{ product.title }}</h2>
             <p class="mb-3">{{ product.description }}</p>
             <div class="d-flex flex-row justify-content-around align-items-center">
-              <p class="h5 text-info">Price ${{ product.price }}</p>
+              <p class="h5 text-info">{{ product.price | currencyFormat }}</p>
               <button class="btn btn-primary" v-on:click="addCart(product)">Add to cart</button>
             </div>
           </figcaption>
