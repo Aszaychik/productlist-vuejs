@@ -52,6 +52,10 @@ const app = new Vue({
     },
     addCart: function (product) {
       this.cart.push(product);
+      console.log('Cart List =>')
+      this.cart.map((item) => (
+        console.log(item.title)
+      ));
     }
   }
 });
