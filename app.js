@@ -34,6 +34,7 @@ const app = new Vue({
       }
       return qty;
     },
+
   },
   mounted: function () {
     fetch('https://dummyjson.com/products')
@@ -87,6 +88,14 @@ const app = new Vue({
       }
 
 
+    },
+
+    deleteItem: function (key) {
+      if (this.cart[key].qty > 1) {
+        this.cart[key].qty--;
+      } else {
+        this.cart.splice(key, 1);
+      }
     }
   }
 });
