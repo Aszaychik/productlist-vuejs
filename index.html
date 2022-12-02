@@ -31,7 +31,7 @@
             <button class="btn btn-success btn-sm dropdown-toggle" id="dropdownCart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="badge badge-pill badge-warning mr-1">{{ cart.length }}</span>
               <i class="fa-solid fa-cart-plus"></i>
-              {{ cartTotal | currencyFormat }}
+              <price :value="Number(cartTotal)"></price>
             </button>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownCart">
               <div v-for="(item, index) in cart" :key="index">
