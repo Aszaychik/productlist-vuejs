@@ -6,20 +6,34 @@
 const app = new Vue({
   el: "#app",
   data: {
+    maximum: 1999,
+    products: null,
+    cart: [],
+    imgClass: 'img-thumbnail img-fluid mb-3',
     style: {
       label: ['font-weight-bold', 'mr-2'],
       inputWidth: 60,
       sliderStatus: false,
     },
-    imgClass: 'img-thumbnail img-fluid mb-3',
-    maximum: 1999,
-    products: null,
-    cart: [],
   },
   computed: {
     sliderState: function () {
       return this.style.sliderStatus ? 'd-flex' : 'd-none';
-    }
+    },
+    cartTotal: function () {
+      let sum = 0;
+      for (key in this.cart) {
+        sum = sum + (this.cart[key].product.price * this.cart[key].qty);
+      }
+      return sum;
+    },
+    cartQty: function () {
+      let qty = 0;
+      for (key in this.cart) {
+        qty = qty + this.cart[key].qty;
+      }
+      return qty;
+    },
   },
   mounted: function () {
     fetch('https://dummyjson.com/products')
@@ -51,11 +65,28 @@ const app = new Vue({
       }, delay)
     },
     addCart: function (product) {
-      this.cart.push(product);
-      console.log('Cart List =>')
-      this.cart.map((item) => (
-        console.log(item.title)
-      ));
+      // this.cart.push(product);
+      // console.log('Cart List =>')
+      // this.cart.map((item) => (
+      //   console.log(item.title)
+      // ));
+      let productIndex;
+      let productExist = this.cart.filter(function (item, index) {
+        if (item.product.id == Number(product.id)) {
+          productIndex = index
+          return true
+        } else {
+          return false
+        }
+      });
+
+      if (productExist.length) {
+        this.cart[productIndex].qty++
+      } else {
+        this.cart.push({ product: product, qty: 1 })
+      }
+
+
     }
   }
 });
