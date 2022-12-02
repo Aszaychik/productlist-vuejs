@@ -28,8 +28,19 @@
             <i class="fa-solid fa-filter-circle-dollar"></i>
           </button>
           <div class="ml-2 p-2 bg-success rounded" v-if="cart.length > 0">
-            <i class="fa-solid fa-cart-plus"></i>
-            <span class="badge badge-success">{{ cart.length }}</span>
+            <button class="btn btn-success btn-sm dropdown-toggle" id="dropdownCart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-cart-plus"></i>
+              <span>{{ cart.length }}</span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownCart">
+              <div v-for="(item, index) in cart" :key="index">
+                <div class="dropdown-item-text text-nowrap text-right">
+                  <span class="badge badge-pill badge-warning align-text-top mr-1"> {{ item.qty }} </span>
+                  {{ item.title }}
+                  <b>{{ item.price | currencyFormat}}</b>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </nav>
