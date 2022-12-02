@@ -25,9 +25,9 @@
       <nav class="navbar">
         <div class="navbar-text ml-auto d-flex align-items-center">
           <button class="p-2 btn btn-sm btn-outline-success" @click="style.sliderStatus = !style.sliderStatus">
-            <i class="fa-solid fa-filter-circle-dollar"></i>
+            <i class="fa-soslid fa-filter-circle-dollar"></i>
           </button>
-          <div class="ml-2 p-2 bg-success rounded" v-if="cart.length > 0">
+          <section class="ml-2 p-2 bg-success rounded" v-if="cart.length > 0">
             <button class="btn btn-success btn-sm dropdown-toggle" id="dropdownCart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="badge badge-pill badge-warning mr-1">{{ cart.length }}</span>
               <i class="fa-solid fa-cart-plus"></i>
@@ -39,10 +39,11 @@
                   <span class="badge badge-pill badge-warning align-text-top mr-1"> {{ item.qty }} </span>
                   {{ item.product.title }}
                   <b>{{ item.product.price * item.qty | currencyFormat}}</b>
+                  <a href="#" class="badge badge-danger text-white" @click.stop="deleteItem(index)"> - </a>
                 </div>
               </div>
             </div>
-          </div>
+          </section>
         </div>
       </nav>
       <hr class="w-25 mx-auto bg-light" />
