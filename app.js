@@ -55,11 +55,6 @@ const app = new Vue({
         console.log('data :>> ', data.products);
       })
   },
-  filters: {
-    currencyFormat: function (value) {
-      return '$' + Number.parseFloat(value).toFixed(2);
-    }
-  },
   methods: {
     before: function (el) {
       el.className = 'd-none'
